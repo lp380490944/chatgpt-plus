@@ -1,14 +1,14 @@
 SHELL=/usr/bin/env bash
 NAME := chatgpt-plus
-all: amd64 arm64
+all: linux darwin
 
-amd64:
-	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o bin/$(NAME)-linux main.go
-.PHONY: amd64
+linux:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o bin/$(NAME)-amd64-linux main.go
+.PHONY: linux
 
-arm64:
-	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 GOARM=7 go build -o bin/$(NAME)-linux main.go
-.PHONY: arm64
+darwin:
+	CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -o bin/$(NAME)-amd64-darwin main.go
+.PHONY: darwin
 
 clean:
 	rm -rf bin/$(NAME)-*

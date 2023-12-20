@@ -54,7 +54,7 @@ func (c *Client) Imagine(prompt string) error {
 			"application_command": map[string]any{
 				"id":                         "938956540159881230",
 				"application_id":             ApplicationID,
-				"version":                    "1118961510123847772",
+				"version":                    "1166847114203123795",
 				"default_permission":         true,
 				"default_member_permissions": nil,
 				"type":                       1,
@@ -75,7 +75,8 @@ func (c *Client) Imagine(prompt string) error {
 		},
 	}
 
-	r, err := c.client.R().SetHeader("Authorization", c.Config.UserToken).
+	url := "https://ds.bitcoinfintech.org/api/v9/interactions"
+	r, err := c.client.R().SetHeader("Authorization", c.config.UserToken).
 		SetHeader("Content-Type", "application/json").
 		SetBody(interactionsReq).
 		Post(c.apiURL)
@@ -104,7 +105,7 @@ func (c *Client) Upscale(index int, messageId string, hash string) error {
 		},
 		Nonce: fmt.Sprintf("%d", time.Now().UnixNano()),
 	}
-
+	url := "https://ds.bitcoinfintech.org/api/v9/interactions"
 	var res InteractionsResult
 	r, err := c.client.R().SetHeader("Authorization", c.Config.UserToken).
 		SetHeader("Content-Type", "application/json").
@@ -136,6 +137,7 @@ func (c *Client) Variation(index int, messageId string, hash string) error {
 		Nonce: fmt.Sprintf("%d", time.Now().UnixNano()),
 	}
 
+	url := "https://ds.bitcoinfintech.org/api/v9/interactions"
 	var res InteractionsResult
 	r, err := c.client.R().SetHeader("Authorization", c.Config.UserToken).
 		SetHeader("Content-Type", "application/json").
